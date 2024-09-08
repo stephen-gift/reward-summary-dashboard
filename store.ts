@@ -85,19 +85,17 @@ export const useBookingsStore = create<StoreState>()(
       generateStats: () => {
         const bookings = get().bookings;
         const totalExpenses = bookings.reduce((sum, booking) => {
-          // Ensure totalBookingAmount exists and is a number or a valid string
           const amount =
             typeof booking.totalBookingAmount === "string"
               ? parseFloat(booking.totalBookingAmount.replace(/,/g, ""))
-              : booking.totalBookingAmount || 0; // Fallback to 0 if it's missing or invalid
+              : booking.totalBookingAmount || 0;
 
           return sum + amount;
         }, 0);
 
-        const totalCashback = totalExpenses * 0.015; // 1.5% cashback
+        const totalCashback = totalExpenses * 0.015;
         const bookingsCount = bookings.length;
 
-        // Set account balance equal to totalCashback
         const accountBalance = totalCashback;
 
         set({
@@ -201,8 +199,6 @@ export const useBookingsStore = create<StoreState>()(
         });
         get().generateStats();
       },
-
-      // ...
     }),
     {
       name: "app-storage",

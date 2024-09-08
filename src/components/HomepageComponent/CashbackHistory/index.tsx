@@ -33,7 +33,7 @@ const CashbackHistory = () => {
   const { bookings, updateBooking, removeBooking, stats } = useBookingsStore();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const [currentBooking, setCurrentBooking] = useState<Booking>(); 
+  const [currentBooking, setCurrentBooking] = useState<Booking>();
   const [editedDetails, setEditedDetails] = useState<string>("");
   const [editedCategory, setEditedCategory] = useState<string>("");
 
@@ -42,8 +42,8 @@ const CashbackHistory = () => {
     if (bookingToEdit) {
       setCurrentBooking(bookingToEdit);
       setEditedDetails(bookingToEdit.bookingDetails);
-      setEditedCategory(bookingToEdit.category); 
-      onOpen(); // Open the modal
+      setEditedCategory(bookingToEdit.category);
+      onOpen();
     }
   };
 
@@ -54,9 +54,9 @@ const CashbackHistory = () => {
         bookingDetails: editedDetails,
         category: editedCategory,
       };
-      updateBooking(updatedBooking); // Update the booking in the store
+      updateBooking(updatedBooking);
     }
-    onClose(); // Close the modal after saving
+    onClose();
   };
 
   const handleDelete = (bookingId: string) => {
@@ -64,13 +64,7 @@ const CashbackHistory = () => {
   };
 
   return (
-    <Box
-      my={8}
-      p={4}
-      borderWidth="1px"
-      borderRadius="lg"
-      boxShadow="md"
-    >
+    <Box my={8} p={4} borderWidth="1px" borderRadius="lg" boxShadow="md">
       <Text fontSize="2xl" fontWeight="bold" mb={4}>
         Cashback History
       </Text>
@@ -123,7 +117,7 @@ const CashbackHistory = () => {
           </Tbody>
         </Table>
       </TableContainer>
-      <Box mt={4} p={4} borderWidth="1px" borderRadius="md" >
+      <Box mt={4} p={4} borderWidth="1px" borderRadius="md">
         <Text fontSize="lg" fontWeight="bold">
           Total Cashback: ${stats.totalCashback.toFixed(2)}
         </Text>

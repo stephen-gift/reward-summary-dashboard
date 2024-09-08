@@ -100,7 +100,7 @@ const CashoutOptions = () => {
     setWithdrawableCashback(newCashback);
 
     const newWithdrawal = {
-      id: Date.now().toString(), // Unique ID
+      id: Date.now().toString(),
       date: new Date().toISOString(),
       amount: cashbackToDeduct,
       method:

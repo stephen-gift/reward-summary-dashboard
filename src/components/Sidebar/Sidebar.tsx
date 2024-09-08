@@ -30,12 +30,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <Logo />
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
-      <VStack
-        spacing={8} 
-        align="stretch"
-        px={4} 
-        
-      >
+      <VStack spacing={8} align="stretch" px={4}>
         <Flex direction="column" w="full">
           {LinkItems.map((link) => (
             <NavItem
@@ -48,10 +43,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
             </NavItem>
           ))}
         </Flex>
-        <Button
-          colorScheme="teal"
-          onClick={initializeStore} // Call initializeStore when button is clicked
-        >
+        <Button colorScheme="teal" onClick={initializeStore}>
           Initialize Bookings
         </Button>
       </VStack>

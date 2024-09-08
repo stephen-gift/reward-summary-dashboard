@@ -31,22 +31,18 @@ const BookingCategoryPieChart = () => {
 
   const { bookings } = useBookingsStore();
 
-  console.log("Bookings from store:", bookings);
-
   if (!bookings || bookings.length === 0) {
     return <p>No bookings available to display.</p>;
   }
 
   const categoryData = bookings.reduce<Record<string, number>>(
     (acc, booking) => {
-      const category = booking.category || "Unknown"; // Fallback if category is undefined
+      const category = booking.category || "Unknown";
       acc[category] = (acc[category] || 0) + 1;
       return acc;
     },
     {}
   );
-
-  console.log("Category data:", categoryData);
 
   const data = Object.entries(categoryData).map(([name, value]) => ({
     name,

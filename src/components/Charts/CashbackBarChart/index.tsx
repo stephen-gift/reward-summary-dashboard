@@ -9,7 +9,14 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
-import { Box, Heading, Select, Stack, Text, useColorModeValue } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Select,
+  Stack,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { useBookingsStore } from "../../../../store";
 
 const CashbackBarChart = () => {
@@ -25,11 +32,10 @@ const CashbackBarChart = () => {
     setDataType(event.target.value as "cashback" | "earnings");
   };
 
-  // Define color modes for light and dark themes
   const bgColor = useColorModeValue("white", "gray.800");
   const textColor = useColorModeValue("gray.600", "gray.200");
-  const barColorCashback = useColorModeValue("#4CAF50", "#81C784"); // Adjust for dark mode
-  const barColorEarnings = useColorModeValue("#3182CE", "#63B3ED"); // Adjust for dark mode
+  const barColorCashback = useColorModeValue("#4CAF50", "#81C784");
+  const barColorEarnings = useColorModeValue("#3182CE", "#63B3ED");
   const boxShadow = useColorModeValue("md", "dark-lg");
 
   return (
@@ -48,7 +54,13 @@ const CashbackBarChart = () => {
         justifyContent={"space-between"}
         alignItems={"center"}
       >
-        <Heading flex={1} as="h3" size="md" textAlign="center" color={textColor}>
+        <Heading
+          flex={1}
+          as="h3"
+          size="md"
+          textAlign="center"
+          color={textColor}
+        >
           Monthly{" "}
           {dataType === "cashback" ? "Cashback Amount" : "Transaction Earnings"}
         </Heading>
@@ -77,7 +89,9 @@ const CashbackBarChart = () => {
             <Legend />
             <Bar
               dataKey={dataKey}
-              fill={dataType === "cashback" ? barColorCashback : barColorEarnings}
+              fill={
+                dataType === "cashback" ? barColorCashback : barColorEarnings
+              }
             />
           </BarChart>
         </ResponsiveContainer>

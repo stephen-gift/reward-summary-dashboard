@@ -56,7 +56,6 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       </Text>
 
       <HStack spacing={{ base: "0", md: "6" }}>
-        {/* DIsplay the withdrawable amount here */}
         <Flex alignItems={"center"}>
           <Menu>
             <MenuButton
@@ -71,7 +70,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
             <MenuList>
               <MenuItem
                 onClick={() => {
-                  updateWithdrawableCashback(); // Update withdrawable cashback to total cashback
+                  updateWithdrawableCashback(); 
                 }}
               >
                 Update Withdrawable Cashback (${stats.totalCashback.toFixed(2)})

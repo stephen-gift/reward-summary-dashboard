@@ -20,13 +20,12 @@ export const processBookings = (bookings: Booking[]) => {
     const month = date.toLocaleString("default", { month: "short" });
     const formattedDate = `${month}`;
 
-    // Ensure totalBookingAmount is a string
     const amountString = String(booking.totalBookingAmount).replace(
       /[^0-9.-]+/g,
       ""
     );
     const amount = parseFloat(amountString);
-    const cashback = amount * 0.015; // 1.5% cashback
+    const cashback = amount * 0.015;
 
     if (monthlyCashback[formattedDate]) {
       monthlyCashback[formattedDate] += cashback;

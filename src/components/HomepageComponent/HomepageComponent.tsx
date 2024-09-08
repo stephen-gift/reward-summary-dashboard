@@ -19,30 +19,26 @@ const HomepageComponent = () => {
   const router = useRouter();
   const pathname = usePathname();
   const [tabIndex, setTabIndex] = useState<number>(0);
-  
 
   useEffect(() => {
-    // Extract tab name from URL
     const urlParams = new URLSearchParams(window.location.search);
     const tabName = urlParams.get("tab") ?? "";
     if (tabName) {
-      // Set tab index based on URL parameter
       const index = tabNames.indexOf(tabName);
       if (index !== -1) {
         setTabIndex(index);
       }
     } else {
-      // Default to the first tab if no tab parameter is found
       setTabIndex(0);
       const newUrl = `${pathname}?tab=${tabNames[0]}`;
-      router.replace(newUrl, { scroll: false }); // Use replace to avoid adding a new entry to the history stack
+      router.replace(newUrl, { scroll: false });
     }
   }, []);
 
   const handleTabChange = (index: number) => {
     const tabName = tabNames[index];
     const newUrl = `${pathname}?tab=${tabName}`;
-    router.push(newUrl, { scroll: false }); // Prevent scroll restoration
+    router.push(newUrl, { scroll: false });
     setTabIndex(index);
   };
   return (
