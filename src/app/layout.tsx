@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Providers } from "./providers";
-import Layout from "@/components/Layout";
 
 export const metadata: Metadata = {
   title: "Balanceè Rewards Summary",
@@ -17,7 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          <Layout>{children}</Layout>
+          {children}
         </Providers>
       </body>
     </html>

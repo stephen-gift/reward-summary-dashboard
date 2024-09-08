@@ -1,11 +1,15 @@
+'use client'
 import { HomepageComponent } from "@/components";
-import { VStack } from "@chakra-ui/react";
+import Layout from "@/components/Layout";
+import { Box } from "@chakra-ui/react";
 
 const HomePageContainer = () => {
   return (
-    <VStack h="100vh" w={"full"} overflow={"hidden"} spacing={0}>
-      <HomepageComponent />
-    </VStack>
+    <Box>
+      <Layout>
+        <HomepageComponent />
+      </Layout>
+    </Box>
   );
 };
 
