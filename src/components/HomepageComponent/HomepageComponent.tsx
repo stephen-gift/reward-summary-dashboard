@@ -7,6 +7,7 @@ import ManageBookings from "./ManageBookings";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import WithdrawalHistory from "./WithdrawalHistory";
+import { useBookingsStore } from "../../../store";
 
 const tabNames = [
   "earnings-overview",
@@ -19,6 +20,17 @@ const HomepageComponent = () => {
   const router = useRouter();
   const pathname = usePathname();
   const [tabIndex, setTabIndex] = useState<number>(0);
+
+  const { initializeStore } = useBookingsStore();
+
+  useEffect(() => {
+    const existingData = localStorage.getItem("app-storage");
+
+    // If no data exists in local storage, initialize the store
+    if (!existingData) {
+      initializeStore();
+    }
+  }, [initializeStore]);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);

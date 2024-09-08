@@ -62,7 +62,6 @@ const ManageBookings = () => {
       borderWidth="1px"
       borderRadius="lg"
       boxShadow="md"
-      bg="white"
     >
       <Text fontSize="2xl" fontWeight="bold" mb={4}>
         Manage Bookings

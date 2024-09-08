@@ -36,9 +36,7 @@ const CashoutOptions = () => {
         availableCashback,
         `Cashout amount cannot exceed available balance of $${availableCashback}`
       ),
-
     selectedMethod: Yup.string().required("Cashout method is required"),
-
     promoCode: Yup.string().when("selectedMethod", {
       is: (value: string) => value === "promo",
       then: (schema) => schema.required("Promo code is required"),
@@ -123,14 +121,7 @@ const CashoutOptions = () => {
   };
 
   return (
-    <Box
-      my={8}
-      p={4}
-      borderWidth="1px"
-      borderRadius="lg"
-      boxShadow="md"
-      bg="white"
-    >
+    <Box my={8} p={4} borderWidth="1px" borderRadius="lg" boxShadow="md">
       <Text fontSize="2xl" fontWeight="bold" mb={4}>
         Cashout Options
       </Text>
@@ -143,10 +134,13 @@ const CashoutOptions = () => {
         validationSchema={validationSchema}
         onSubmit={handleCashout}
       >
-        {({ values, handleChange, handleSubmit }) => (
+        {({ values, handleChange, handleSubmit, errors, touched }) => (
           <Form onSubmit={handleSubmit}>
             <Stack spacing={4}>
-              <FormControl isInvalid={!!ErrorMessage.name}>
+              {/* Cashout Amount */}
+              <FormControl
+                isInvalid={!!errors.cashoutAmount && touched.cashoutAmount}
+              >
                 <FormLabel htmlFor="cashoutAmount">
                   Cashout Amount ($)
                 </FormLabel>
@@ -157,13 +151,17 @@ const CashoutOptions = () => {
                   type="number"
                   onChange={handleChange}
                   value={values.cashoutAmount}
+                  colorScheme="teal"
                 />
                 <FormErrorMessage>
                   <ErrorMessage name="cashoutAmount" />
                 </FormErrorMessage>
               </FormControl>
 
-              <FormControl>
+              {/* Cashout Method */}
+              <FormControl
+                isInvalid={!!errors.selectedMethod && touched.selectedMethod}
+              >
                 <FormLabel htmlFor="cashoutMethod">Cashout Method</FormLabel>
                 <Field
                   as={Select}
@@ -180,8 +178,11 @@ const CashoutOptions = () => {
                 </FormErrorMessage>
               </FormControl>
 
+              {/* Promo Code (conditional field) */}
               {values.selectedMethod === "promo" && (
-                <FormControl isInvalid={!!ErrorMessage.name}>
+                <FormControl
+                  isInvalid={!!errors.promoCode && touched.promoCode}
+                >
                   <FormLabel htmlFor="promoCode">Promo Code</FormLabel>
                   <Field
                     as={Input}
@@ -190,6 +191,7 @@ const CashoutOptions = () => {
                     type="text"
                     onChange={handleChange}
                     value={values.promoCode}
+                    placeholder="SAVE10, BONUS20"
                   />
                   <FormErrorMessage>
                     <ErrorMessage name="promoCode" />
