@@ -4,6 +4,7 @@ import { BsCash } from "react-icons/bs";
 import { FiDollarSign } from "react-icons/fi";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useBookingsStore } from "../../../../store";
+import { formatAmountWithCommas } from "@/utils/formatAmount";
 
 export default function StatsGrid() {
   const { stats } = useBookingsStore();
@@ -12,12 +13,12 @@ export default function StatsGrid() {
     <StatGroup gap={5}>
       <StatsCard
         title={"Total Cashback"}
-        stat={`$${stats.totalCashback.toFixed(2)}`}
+        stat={`$${formatAmountWithCommas(stats.totalCashback)}`}
         icon={<BsCash size={"3em"} />}
       />
       <StatsCard
         title={"Expenses"}
-        stat={`$${stats.totalExpenses.toFixed(2)}`}
+        stat={`$${formatAmountWithCommas(stats.totalExpenses)}`}
         icon={<FiDollarSign size={"3em"} />}
       />
       <StatsCard

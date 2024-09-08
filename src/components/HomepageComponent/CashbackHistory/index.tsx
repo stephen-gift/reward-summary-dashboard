@@ -26,6 +26,7 @@ import {
 import { Booking, useBookingsStore } from "../../../../store";
 import { BiEdit } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
+import { formatAmountWithCommas } from "@/utils/formatAmount";
 
 const cashbackRate = 0.015;
 
@@ -68,60 +69,68 @@ const CashbackHistory = () => {
       <Text fontSize="2xl" fontWeight="bold" mb={4}>
         Cashback History
       </Text>
-      <TableContainer>
-        <Table variant="striped" colorScheme="teal">
-          <Thead>
-            <Tr>
-              <Th>Transaction Date</Th>
-              <Th>Total Booking Amount ($)</Th>
-              <Th>Booking Details</Th>
-              <Th>Category</Th>
-              <Th>Cashback Earned ($)</Th>
-              <Th>Actions</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {bookings.map((booking) => {
-              const sanitizedAmount = String(
-                booking.totalBookingAmount
-              ).replace(/[^0-9.-]+/g, "");
-              const totalBookingAmount = parseFloat(sanitizedAmount);
-              const cashbackEarned = (
-                totalBookingAmount * cashbackRate
-              ).toFixed(2);
-
-              return (
-                <Tr key={booking.id}>
-                  <Td>{booking.transactionDate}</Td>
-                  <Td>{booking.totalBookingAmount}</Td>
-                  <Td>{booking.bookingDetails}</Td>
-                  <Td>{booking.category}</Td>
-                  <Td>{cashbackEarned}</Td>
-                  <Td>
-                    <IconButton
-                      aria-label="Edit Booking"
-                      icon={<BiEdit />}
-                      onClick={() => handleEdit(booking.id)}
-                      mr={2}
-                    />
-                    <IconButton
-                      aria-label="Delete Booking"
-                      icon={<MdDelete />}
-                      colorScheme="red"
-                      onClick={() => handleDelete(booking.id)}
-                    />
-                  </Td>
-                </Tr>
-              );
-            })}
-          </Tbody>
-        </Table>
-      </TableContainer>
-      <Box mt={4} p={4} borderWidth="1px" borderRadius="md">
-        <Text fontSize="lg" fontWeight="bold">
-          Total Cashback: ${stats.totalCashback.toFixed(2)}
+      {bookings.length === 0 ? (
+        <Text fontSize="lg" textAlign="center" mt={4}>
+          No bookings found.
         </Text>
-      </Box>
+      ) : (
+        <>
+          <TableContainer>
+            <Table variant="striped" colorScheme="teal">
+              <Thead>
+                <Tr>
+                  <Th>Transaction Date</Th>
+                  <Th>Total Booking Amount ($)</Th>
+                  <Th>Booking Details</Th>
+                  <Th>Category</Th>
+                  <Th>Cashback Earned ($)</Th>
+                  <Th>Actions</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {bookings.map((booking) => {
+                  const sanitizedAmount = String(
+                    booking.totalBookingAmount
+                  ).replace(/[^0-9.-]+/g, "");
+                  const totalBookingAmount = parseFloat(sanitizedAmount);
+                  const cashbackEarned = (
+                    totalBookingAmount * cashbackRate
+                  ).toFixed(2);
+
+                  return (
+                    <Tr key={booking.id}>
+                      <Td>{booking.transactionDate}</Td>
+                      <Td>{formatAmountWithCommas(totalBookingAmount)}</Td>
+                      <Td>{booking.bookingDetails}</Td>
+                      <Td>{booking.category}</Td>
+                      <Td>{formatAmountWithCommas(Number(cashbackEarned))}</Td>
+                      <Td>
+                        <IconButton
+                          aria-label="Edit Booking"
+                          icon={<BiEdit />}
+                          onClick={() => handleEdit(booking.id)}
+                          mr={2}
+                        />
+                        <IconButton
+                          aria-label="Delete Booking"
+                          icon={<MdDelete />}
+                          colorScheme="red"
+                          onClick={() => handleDelete(booking.id)}
+                        />
+                      </Td>
+                    </Tr>
+                  );
+                })}
+              </Tbody>
+            </Table>
+          </TableContainer>
+          <Box mt={4} p={4} borderWidth="1px" borderRadius="md">
+            <Text fontSize="lg" fontWeight="bold">
+              Total Cashback: ${formatAmountWithCommas(stats.totalCashback)}
+            </Text>
+          </Box>
+        </>
+      )}
 
       {/* Modal for editing booking details */}
       <Modal isOpen={isOpen} onClose={onClose}>
