@@ -25,8 +25,8 @@ The Rewards Summary Page allows customers to view their total cashback earnings,
 
 ### Links
 
-- Live Site URL: [Balanceè Rewards Summary](https://customer.balancee.app/)
-- GitHub URL: [Repository](#)
+- Live Site URL: [Balanceè Rewards Summary](https://reward-summary-dashboard.vercel.app/)
+- GitHub URL: [Repository](https://github.com/stephen-gift/reward-summary-dashboard/)
 
 ## Technologies Used
 
