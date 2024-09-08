@@ -75,7 +75,7 @@ I chose **Next.js** over traditional **React** for several key reasons:
 ### Clone the repository
 
 ```bash
-git clone https://github.com/your-username/rewards-summary-page.git
+git clone https://github.com/stephen-gift/reward-summary-dashboard.git
 ```
 
 ### Install dependencies
